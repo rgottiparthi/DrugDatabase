@@ -25,3 +25,9 @@ conn.execute('''CREATE TABLE interacts
                 PRIMARY KEY(D_Name_1, D_Name_2)
                 FOREIGN KEY (D_Name_1) REFERENCES Drugs(D_Name),
                 FOREIGN KEY (D_Name_2) REFERENCES Drugs(D_Name))''')
+
+conn.execute('''CREATE TABLE Takes
+               (UserID TEXT 
+                Age INTEGER,
+                Sex TEXT
+                Pregnancy TEXT)''')
