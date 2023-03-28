@@ -8,6 +8,15 @@ conn.execute('''CREATE TABLE Drugs
                 Basic_Description TEXT,
                 Adverse_Effect_Description TEXT)''')
 
+conn.execute('''CREATE TABLE Products
+               (P_Name TEXT PRIMARY KEY,
+                Cost REAL,
+                Form TEXT,
+                Manufacturer TEXT,
+                D_NAME TEXT NOT NULL
+                FOREIGN KEY (D_Name) REFERENCES Drugs (D_Name)
+                    ON DELETE CASCADE ON UPDATE NO ACTION)''')
+
 conn.execute('''CREATE TABLE Indications
                (I_Name TEXT,
                 Severity TEXT,
@@ -28,6 +37,13 @@ conn.execute('''CREATE TABLE interacts
 
 conn.execute('''CREATE TABLE Takes
                (UserID TEXT 
-                Age INTEGER,
+                Age INT,
                 Sex TEXT
                 Pregnancy TEXT)''')
+
+conn.execute('''CREATE TABLE Has
+               (UserID TEXT,
+                I_Name TEXT,
+                FOREIGN KEY (UserID)
+                
+                )''')
