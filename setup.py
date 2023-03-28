@@ -20,14 +20,17 @@ conn.execute('''CREATE TABLE Products
 conn.execute('''CREATE TABLE Indications
                (I_Name TEXT,
                 Severity TEXT,
-                Description TEXT)''')
+                Description TEXT
+                    ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
 conn.execute('''CREATE TABLE Treats
                (D_Name TEXT,
                 I_Name TEXT,
                 PRIMARY KEY(D_Name_1, D_Name_2)
-                FOREIGN KEY (D_Name_1) 
-                FOREIGN KEY (I_Name_2)''')
+                FOREIGN KEY (D_Name_1)
+                    ON DELETE CASCADE ON UPDATE NO ACTION 
+                FOREIGN KEY (I_Name_2)
+                    ON DELETE CASCADE ON UPDATE NO ACTION''')
 
 conn.execute('''CREATE TABLE User
                (UserID TEXT,
@@ -52,4 +55,6 @@ conn.execute('''CREATE TABLE Has
                (UserID TEXT,
                 I_Name TEXT,
                 FOREIGN KEY (UserID)
-                FOREIGN KEY (I_Name))''')
+                    ON DELETE CASCADE ON UPDATE NO ACTION
+                FOREIGN KEY (I_Name)
+                    ON DELETE CASCADE ON UPDATE NO ACTION)''')
