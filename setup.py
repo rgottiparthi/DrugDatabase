@@ -13,13 +13,20 @@ conn.execute('''CREATE TABLE Indications
                 Severity TEXT,
                 Description TEXT)''')
 
+conn.execute('''CREATE TABLE Treats
+               (D_Name TEXT,
+                I_Name TEXT,
+                PRIMARY KEY(D_Name_1, D_Name_2)
+                FOREIGN KEY (D_Name_1) 
+                FOREIGN KEY (I_Name_2)''')
+
 conn.execute('''CREATE TABLE User
                (UserID TEXT,
                 Age INT,
                 Sex TEXT
                 Pregnancy TEXT)''')
 
-conn.execute('''CREATE TABLE interacts
+conn.execute('''CREATE TABLE Interacts
                (D_Name_1 TEXT,
                 D_Name_2 TEXT,
                 PRIMARY KEY(D_Name_1, D_Name_2)
@@ -31,3 +38,4 @@ conn.execute('''CREATE TABLE Takes
                 Age INTEGER,
                 Sex TEXT
                 Pregnancy TEXT)''')
+
