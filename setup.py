@@ -27,3 +27,9 @@ conn.execute('''CREATE TABLE User
                 Age INTEGER,
                 Sex TEXT
                 Pregnancy TEXT)''')
+
+conn.execute('''CREATE TABLE Takes
+               (UserID TEXT 
+                Age INTEGER,
+                Sex TEXT
+                Pregnancy TEXT)''')
