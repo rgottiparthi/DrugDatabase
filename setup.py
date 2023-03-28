@@ -52,5 +52,5 @@ conn.execute('''CREATE TABLE Has
                (UserID TEXT,
                 I_Name TEXT,
                 FOREIGN KEY (UserID)
-                
+                FOREIGN KEY (I_Name)
                 )''')
