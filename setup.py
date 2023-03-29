@@ -13,7 +13,7 @@ conn.execute('''CREATE TABLE Products
                 Cost REAL,
                 Form TEXT,
                 Manufacturer TEXT,
-                D_NAME TEXT NOT NULL
+                D_NAME TEXT NOT NULL,
                 FOREIGN KEY (D_Name) REFERENCES Drugs (D_Name)
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
@@ -26,9 +26,9 @@ conn.execute('''CREATE TABLE Indications
 conn.execute('''CREATE TABLE Treats
                (D_Name TEXT,
                 I_Name TEXT,
-                PRIMARY KEY(D_Name_1, D_Name_2)
+                PRIMARY KEY(D_Name_1, D_Name_2),
                 FOREIGN KEY (D_Name_1)
-                    ON DELETE CASCADE ON UPDATE NO ACTION 
+                    ON DELETE CASCADE ON UPDATE NO ACTION,
                 FOREIGN KEY (I_Name_2)
                     ON DELETE CASCADE ON UPDATE NO ACTION''')
 
@@ -42,19 +42,21 @@ conn.execute('''CREATE TABLE Interacts
                (D_Name_1 TEXT,
                 D_Name_2 TEXT,
                 PRIMARY KEY(D_Name_1, D_Name_2)
-                FOREIGN KEY (D_Name_1) REFERENCES Drugs(D_Name),
-                FOREIGN KEY (D_Name_2) REFERENCES Drugs(D_Name))''')
+                FOREIGN KEY (D_Name_1) REFERENCES Drugs(D_Name)
+                    ON DELETE CASCADE ON UPDATE NO ACTION,
+                FOREIGN KEY (D_Name_2) REFERENCES Drugs(D_Name))
+                    ON DELETE CASCADE ON UPDATE NO ACTION''')
 
 conn.execute('''CREATE TABLE Takes
                (UserID TEXT 
                 Age INT,
-                Sex TEXT
+                Sex TEXT,
                 Pregnancy TEXT)''')
 
 conn.execute('''CREATE TABLE Has
                (UserID TEXT,
                 I_Name TEXT,
                 FOREIGN KEY (UserID)
-                    ON DELETE CASCADE ON UPDATE NO ACTION
+                    ON DELETE CASCADE ON UPDATE NO ACTION,
                 FOREIGN KEY (I_Name)
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
