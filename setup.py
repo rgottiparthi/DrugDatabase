@@ -4,9 +4,9 @@ conn = sqlite3.connect('drugData.db')
 
 
 conn.execute('''CREATE TABLE Drugs
-               (D_Name TEXT,
+               (D_Name TEXT PRIMARY KEY,
                 Basic_Description TEXT,
-                Adverse_Effect_Description TEXT)''')
+                Adverse_Effect_Description TEXT)''') # adverse effects description is not in the file
 
 conn.execute('''CREATE TABLE Products
                (P_Name TEXT PRIMARY KEY,
@@ -60,3 +60,31 @@ conn.execute('''CREATE TABLE Has
                     ON DELETE CASCADE ON UPDATE NO ACTION,
                 FOREIGN KEY (I_Name)
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
+
+
+import xml.etree.ElementTree as et
+
+# Parsing the XML file
+tree = et.parse('full_database.xml')
+root = tree.getroot()
+
+# drugs data
+for drug in root:
+    name = drug.find("{http://www.drugbank.ca}name").text
+    desc = drug.find("{http://www.drugbank.ca}description").text
+    cur.execute("INSERT INTO Drugs (D_Name, Basic_Description) VALUES (?, ?)", (name, desc))
+conn.commit()
+
+
+# products data
+for drug in root:
+    products = drug.find("{http://www.drugbank.ca}products")
+    for product in products:
+        product_name = product.find("{http://www.drugbank.ca}name").text
+        product_labeller = product.find("{http://www.drugbank.ca}labeller").text
+        # not finished
+
+# indications data
+for drug in root:
+    indication = drug.find("{http://www.drugbank.ca}indication").text
+    cur.execute
