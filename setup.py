@@ -1,9 +1,10 @@
 import sqlite3
 
 conn = sqlite3.connect('drugData.db')
+cur = conn.cursor()
 
 # drugs table
-conn.execute('''CREATE TABLE Drugs
+cur.execute('''CREATE TABLE Drugs
                (D_Name TEXT PRIMARY KEY,
                 Basic_Description TEXT,
                 Toxicity TEXT,
@@ -11,7 +12,7 @@ conn.execute('''CREATE TABLE Drugs
                 Food_Interactions TEXT)''')
 
 # products table
-conn.execute('''CREATE TABLE Products
+cur.execute('''CREATE TABLE Products
                (P_Name TEXT PRIMARY KEY,
                 Form TEXT,
                 Strength TEXT,
@@ -40,13 +41,13 @@ conn.execute('''CREATE TABLE Products
 #                FOREIGN KEY (I_Name_2)
 #                    ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
-conn.execute('''CREATE TABLE User
+cur.execute('''CREATE TABLE User
                (UserID TEXT PRIMARY KEY,
                 Age INT,
                 Sex TEXT
                 Pregnancy TEXT)''')
 
-conn.execute('''CREATE TABLE Interacts
+cur.execute('''CREATE TABLE Interacts
                (D_Name_1 TEXT,
                 D_Name_2 TEXT,
                 I_Description TEXT,
@@ -56,7 +57,7 @@ conn.execute('''CREATE TABLE Interacts
                 FOREIGN KEY (D_Name_2) REFERENCES Drugs(D_Name)
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
-conn.execute('''CREATE TABLE Takes
+cur.execute('''CREATE TABLE Takes
                (UserID TEXT PRIMARY KEY,
                 D_Name TEXT,
                 FOREIGN KEY (D_Name) REFERENCES Drugs(D_Name)
