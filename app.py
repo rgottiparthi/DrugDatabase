@@ -11,5 +11,22 @@ app = Flask(__name__)
 def index():
    return render_template('home.html')
 
+@app.route('/profile')
+def profile():
+   return render_template('profile.html')
+
+@app.route('/aggregate')
+def aggregate():
+   return render_template('aggregate.html')
+
+@app.route('/insert')
+def insert():
+   return render_template('insert.html')
+
+@app.route('/search')
+def search():
+   return render_template('search.html')
+
+
 if __name__ == '__main__':
    app.run(debug = True)
