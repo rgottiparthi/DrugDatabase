@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Create User Profile{% endblock %}
+
+{% block content %}
+<title>Product Search Results</title>
+<style>
+    input[type="submit"] {
+    background-color: #3f51b5;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #2c3e50;
+  }
+    table {
+        border-collapse: collapse;
+        justify-content: center;
+        width: 75%;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: lightgray;
+    }
+</style>
+<body>
+  <h1>Product Search Results</h1>
+      <p>Do some kind of python code to display different attribute names based on which search was used</p>
+      
+    <body>
+    <h3>Attributes for Products</h3>
+    <table>
+        <tr>
+            <th>Attribute</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Product Name:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Form:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Strength:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Route:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Manufacturer:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Marketing Start:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Marketing End:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Generic:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>OTC:</td>
+            <td></td>
+        </tr>
+    </table>
+        <form>
+          <input type="submit" value="Update this entry"/>
+          <p> </p>
+          <input type="submit" value="Save Updates"/>
+          <p> </p>
+          <input type="submit" value="Delete this entry"/>
+          <p> </p>
+        </form>
+</body>
+</html>
+
