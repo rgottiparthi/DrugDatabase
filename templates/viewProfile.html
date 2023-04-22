@@ -1,46 +1,42 @@
-{% extends 'base.html' %}
+    {% extends 'base.html' %}
 
-{% block title %}Create User Profile{% endblock %}
+    {% block title %}Create User Profile{% endblock %}
 
-{% block content %}
-    <title>View User Profiles</title>
-  <body>
-    <main>
-      <h2>View User Profiles</h2>
-      <style>
-        table {
-            border-collapse: collapse;
-            justify-content: center;
-            width: 75%;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: lightgray;
-        }
-    </style>
-    <p>There are currently (numUser) users</p>
-    <h2>User Profile</h2>
-    <table>
+    {% block content %}
+        <title>View User Profiles</title>
+    <body>
+        <main>
+        <h2>View User Profiles</h2>
+        <style>
+            table {
+                border-collapse: collapse;
+                justify-content: center;
+                width: 75%;
+            }
+            th, td {
+                border: 1px solid black;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: lightgray;
+            }
+        </style>
+        <p>There are currently {{ numUser }} users</p>
+        <h2>User Profile</h2>
+        <table>
         <tr>
-            <th>Attribute</th>
-            <th>Value</th>
+            <th>Name:</th>
+            <th>Age:</th>
+            <th>Sex:</th>
         </tr>
+        {% for i in range(numUser) %}
         <tr>
-            <td>Name:</td>
-            <td></td>
+            <td>{{ users[i][0] }}</td>
+            <td>{{ users[i][1] }}</td>
+            <td>{{ users[i][2] }}</td>
         </tr>
-        <tr>
-            <td>Age:</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Sex:</td>
-            <td></td>
-        </tr>
-    </table>
-    </main>
-    {% endblock %}
+        {% endfor %}
+        </table>
+        </main>
+        {% endblock %}

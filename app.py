@@ -16,8 +16,15 @@ def profile():
    return render_template('createProfile.html')
 
 @app.route('/viewProfile')
-def insert():
-   return render_template('viewProfile.html')
+def viewProfile():
+   conn = sql.connect('drugData.db')
+   cur = conn.cursor()
+   cur.execute('''SELECT COUNT(UserID) FROM User''')
+   numUser = cur.fetchone()[0]
+   cur.execute('''SELECT UserID, Age, Sex FROM User''')
+   users = cur.fetchall()
+   return render_template('viewProfile.html', numUser = numUser, users = users)
+
 
 @app.route('/search')
 def search():
