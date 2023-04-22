@@ -1,9 +1,10 @@
 import sqlite3
 
-conn = sqlite3.connect(':memory:')
+conn = sqlite3.connect('drugData.db')
 cur = conn.cursor()
 
 # drugs table
+cur.execute("DROP TABLE IF EXISTS Drugs")
 cur.execute('''CREATE TABLE Drugs
                (D_Name TEXT PRIMARY KEY,
                 Basic_Description TEXT,
@@ -11,6 +12,7 @@ cur.execute('''CREATE TABLE Drugs
                 Indications TEXT)''')
 
 # products table
+cur.execute("DROP TABLE IF EXISTS Products")
 cur.execute('''CREATE TABLE Products
                (P_ID INTEGER PRIMARY KEY,
                 P_Name TEXT,
@@ -26,10 +28,12 @@ cur.execute('''CREATE TABLE Products
                 FOREIGN KEY (D_Name) REFERENCES Drugs (D_Name)
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
+cur.execute("DROP TABLE IF EXISTS Indications")
 cur.execute('''CREATE TABLE Indications
                (I_Name TEXT PRIMARY KEY,
                 Description TEXT)''')
 
+cur.execute("DROP TABLE IF EXISTS Treats")
 cur.execute('''CREATE TABLE Treats
                (D_Name TEXT,
                 I_Name TEXT,
@@ -39,6 +43,7 @@ cur.execute('''CREATE TABLE Treats
                 FOREIGN KEY (I_Name) REFERENCES Indications (I_Name)
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
+cur.execute("DROP TABLE IF EXISTS User")
 cur.execute('''CREATE TABLE User
                (UserID TEXT PRIMARY KEY,
                 Age INT,
@@ -48,6 +53,7 @@ cur.execute('''CREATE TABLE User
                 Indication2 TEXT,
                 Indication3 TEXT)''')
 
+cur.execute("DROP TABLE IF EXISTS Interacts")
 cur.execute('''CREATE TABLE Interacts
                (D_Name_1 TEXT,
                 D_Name_2 TEXT,
@@ -58,12 +64,14 @@ cur.execute('''CREATE TABLE Interacts
                 FOREIGN KEY (D_Name_2) REFERENCES Drugs(D_Name)
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
+cur.execute("DROP TABLE IF EXISTS Takes")
 cur.execute('''CREATE TABLE Takes
                (UserID TEXT PRIMARY KEY,
                 D_Name TEXT,
                 FOREIGN KEY (D_Name) REFERENCES Drugs(D_Name)
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
+cur.execute("DROP TABLE IF EXISTS Has")
 cur.execute('''CREATE TABLE Has
                (UserID TEXT,
                 I_Name TEXT,
@@ -78,11 +86,11 @@ import xml.etree.ElementTree as et
 import csv
 
 # Parsing the XML file
-tree = et.parse("C:\\Users\\tinatian\\Documents\\full_database.xml")
+tree = et.parse("drugData.xml")
 root = tree.getroot()
 
 # importing indications.csv file
-indications_file = open("C:\\Users\\tinatian\\Documents\\indications.csv")
+indications_file = open("indications.csv")
 contents = csv.reader(indications_file)
 cur.executemany("INSERT INTO Indications (I_Name, Description) VALUES (?, ?)", contents)
 conn.commit()
