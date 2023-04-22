@@ -114,15 +114,115 @@
     <main>
       <h2>Search for a drug</h2>
       <form>
-        <label for="Drug Name">Drug Name</label>
+        <label for="Drug Name">Drug Name:</label>
         <input type="text" id="Drug Name" name="Drug Name" required />
 
-        <input type="submit" value="Search" />
+        <input type="submit" value="Search drugs" />
       </form>
+      <h3>Search for a product</h3>
+      <form>
+        <label for="Product Name">Product Name:</label>
+        <input type="text" id="Drug Name" name="Drug Name" required />
 
-	<p>Put in a view of the data, and the ability to remove and update data </p>
-
+        <input type="submit" value="Search products" />
+      </form>
 	
+      <h3>Search Results</h3>
+
+      
+      <p>Do some kind of python code to display different attribute names based on which search was used</p>
+      <style>
+        table {
+            border-collapse: collapse;
+            justify-content: center;
+            width: 75%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <h1>Attributes for Drugs</h1>
+    <table>
+        <tr>
+            <th>Attribute</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Drug Name:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Basic Description:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Toxicity:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Indications:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Food Interactions:</td>
+            <td></td>
+        </tr>
+    </table>
+    <h1>Attributes for Products</h1>
+    <table>
+        <tr>
+            <th>Attribute</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Product Name:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Form:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Strength:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Route:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Manufacturer:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Marketing Start:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Marketing End:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Generic:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>OTC:</td>
+            <td></td>
+        </tr>
+    </table>
+        <form>
+          <input type="submit" value="Update this entry"/>
+          <input type="submit" value="Save Updates"/>
+          <input type="submit" value="Delete this entry"/>
+        </form>
     </main>
 
     <footer>
