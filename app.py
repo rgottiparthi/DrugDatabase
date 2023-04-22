@@ -36,7 +36,7 @@ def submit_profile():
          sex = request.form['sex']
 
          # connect to the database and aquire a "cursor"
-         with sql.connect("movieData.db") as con:
+         with sql.connect("drugData.db") as con:
             cur = con.cursor()
             # insert the form values in the database
             cur.execute("INSERT INTO User (Username, Age, Sex) VALUES (?,?,?)",(username, age, sex) )
