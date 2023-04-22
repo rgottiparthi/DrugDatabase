@@ -1,96 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Drug Database Homepage</title>
-    <style>
-      /* Add some basic styling */
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-      }
+{% extends 'base.html' %}
 
-      /* Style the header */
-      header {
-        background-color: #3f51b5;
-        color: white;
-        padding: 20px;
-        text-align: center;
-      }
+{% block title %}Drug Database Homepage{% endblock %}
 
-      /* Style the navigation menu */
-      nav {
-        background-color: #f2f2f2;
-        display: flex;
-        justify-content: center;
-        padding: 10px;
-      }
-
-      /* Style the links in the navigation menu */
-      nav a {
-        color: #333;
-        font-weight: bold;
-        margin-right: 20px;
-        text-decoration: none;
-        text-transform: uppercase;
-      }
-	
-	nav b {
-        color: #333;
-	      font-weight: bold;
-        margin-right: 20px;
-        text-decoration: none;
-        text-transform: uppercase;
-      }
-
-      nav a:hover {
-        color: #3f51b5;
-      }
-
-      /* Style the main content area */
-      main {
-        margin: 20px;
-        padding: 20px;
-      }
-	
-      /* Add some basic styles to the footer */
-      footer {
-        background-color: #3f51b5;
-        color: white;
-        padding: 20px;
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>Drug Database</h1>
-    </header>
-
-    <nav>
-      <a href="/">Homepage</a>
-	    <b>|</b>
-      <a href="/profile">User Profile</a>
-	    <b>|</b>
-      <a href="/search">Search</a>
-	    <b>|</b>
-      <a href="/aggregate">Aggregate Queries</a>
-    </nav>
-
-    <main>
-      <h2>Welcome to the Drug Database</h2>
-      <p>
-        This is the drug database homepage. Use this page to navigate to various functionalities that this database offers. You can also bookmark this page.
-      </p>
+{% block content %}
+  <h2>Welcome to the Drug Database</h2>
+  <p>
+    This is the drug database homepage. Use this page to navigate to various functionalities that this database offers. You can also bookmark this page.
+  </p>
 	
 	<img src="https://images.unsplash.com/photo-1524683745036-b46f52b8505a?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=715&amp;q=80" alt="Medicine Machine" width="400" height="500">
 	<img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Medicine Man" width="700" height="500">
 	<img src="https://images.unsplash.com/photo-1522335579687-9c718c5184d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" alt="Medicine Manager" width="500" height="500">
-
-    </main>
-
-    <footer>
-      <p>&copy; 2023 Tina Tian, Rohith Gottiparthi, Joshua Krug. All rights reserved.</p>
-    </footer>
-  </body>
-</html>
+  
+{% endblock %}

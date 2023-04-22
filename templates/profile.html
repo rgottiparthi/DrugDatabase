@@ -1,134 +1,22 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Create User Profile</title>
-    <style>
-      /* Add some basic styling */
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-      }
+{% extends 'base.html' %}
 
-      /* Style the header */
-      header {
-        background-color: #3f51b5;
-        color: white;
-        padding: 20px;
-        text-align: center;
-      }
+{% block title %}Create User Profile{% endblock %}
 
-      /* Style the navigation menu */
-      nav {
-        background-color: #f2f2f2;
-        display: flex;
-        justify-content: center;
-        padding: 10px;
-      }
+{% block content %}
 
-      /* Style the links in the navigation menu */
-      nav a {
-        color: #333;
-        font-weight: bold;
-        margin-right: 20px;
-        text-decoration: none;
-        text-transform: uppercase;
-      }
-
-      nav b {
-        color: #333;
-	      font-weight: bold;
-        margin-right: 20px;
-        text-decoration: none;
-        text-transform: uppercase;
-      }
-
-      nav a:hover {
-        color: #3f51b5;
-      }
-
-      /* Style the main content area */
-      main {
-        margin: 20px;
-        padding: 20px;
-      }
-
-      /* Add some basic styles to the footer */
-      footer {
-        background-color: #3f51b5;
-        color: white;
-        padding: 20px;
-        text-align: center;
-      }
-
-      /* Style the form */
-      form {
-        display: flex;
-        flex-direction: column;
-        margin-top: 20px;
-      }
-
-      label {
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-
-      input[type="text"] {
-        padding: 10px;
-        margin-bottom: 10px;
-        border: none;
-        border-radius: 5px;
-        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-      }
-
-      input[type="submit"] {
-        background-color: #3f51b5;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.2s ease-in-out;
-      }
-
-      input[type="submit"]:hover {
-        background-color: #2c3e50;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>Drug Database</h1>
-    </header>
-
-     <nav>
-      <a href="/">Homepage</a>
-	    <b>|</b>
-      <a href="/profile">User Profile</a>
-	    <b>|</b>
-      <a href="/search">Search</a>
-	    <b>|</b>
-      <a href="/aggregate">Aggregate Queries</a>
-    </nav>
-
-    <main>
-      <h2>Create User Profile</h2>
-      <form action="/submit-profile" method="post">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required />
     
-        <label for="age">Age</label>
-        <input type="number" id="age" name="age" required />
+  <h2>Create User Profile</h2>
+  <form action="/submit-profile" method="post">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" required />
     
-        <label for="sex">Sex</label>
-        <input type="text" id="sex" name="sex" required />
+    <label for="age">Age</label>
+    <input type="number" id="age" name="age" required />
     
-        <input type="submit" value="Create Profile" />
-      </form>
-    </main>
+    <label for="sex">Sex</label>
+    <input type="text" id="sex" name="sex" required />
+    
+    <input type="submit" value="Create Profile" />
+  </form>
 
-    <footer>
-      <p>&copy; 2023 Drug Database. All rights reserved.</p>
-    </footer>
-  </body>
-</html>
+  {% endblock %}
