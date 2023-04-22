@@ -17,7 +17,7 @@ def profile():
 
 @app.route('/viewProfile')
 def insert():
-   return render_template('insert.html')
+   return render_template('viewProfile.html')
 
 @app.route('/search')
 def search():
@@ -35,7 +35,7 @@ def submit_profile():
          with sql.connect("drugData.db") as con:
             cur = con.cursor()
             # insert the form values in the database
-            cur.execute("INSERT INTO User (Username, Age, Sex) VALUES (?,?,?)",(username, age, sex) )
+            cur.execute("INSERT INTO User (UserID, Age, Sex) VALUES (?,?,?)",(username, age, sex) )
             con.commit()
       except:
          con.rollback()
