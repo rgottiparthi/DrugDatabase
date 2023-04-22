@@ -61,39 +61,7 @@
         text-align: center;
       }
 
-      /* Style the form */
-      form {
-        display: flex;
-        flex-direction: column;
-        margin-top: 20px;
-      }
-
-      label {
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-
-      input[type="text"] {
-        padding: 10px;
-        margin-bottom: 10px;
-        border: none;
-        border-radius: 5px;
-        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-      }
-
-      input[type="submit"] {
-        background-color: #3f51b5;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.2s ease-in-out;
-      }
-
-      input[type="submit"]:hover {
-        background-color: #2c3e50;
-      }
+   
     </style>
   </head>
   <body>
@@ -104,25 +72,50 @@
      <nav>
       <a href="/">Homepage</a>
 	    <b>|</b>
-      <a href="/profile">User Profile</a>
+      <a href="/createProfile">Create Profile</a>
+	    <b>|</b>
+      <a href="/viewProfile">View Profiles</a>
 	    <b>|</b>
       <a href="/search">Search</a>
     </nav>
 
     <main>
-      <h2>Create User Profile</h2>
-      <form action="/submit-profile" method="post">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required />
-    
-        <label for="age">Age</label>
-        <input type="number" id="age" name="age" required />
-    
-        <label for="sex">Sex</label>
-        <input type="text" id="sex" name="sex" required />
-    
-        <input type="submit" value="Create Profile" />
-      </form>
+      <h2>View User Profiles</h2>
+      <style>
+        table {
+            border-collapse: collapse;
+            justify-content: center;
+            width: 75%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: lightgray;
+        }
+    </style>
+    <p>There are currently (numUser) users</p>
+    <h2>User Profile</h2>
+    <table>
+        <tr>
+            <th>Attribute</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Age:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Sex:</td>
+            <td></td>
+        </tr>
+    </table>
     </main>
 
     <footer>

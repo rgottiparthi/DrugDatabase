@@ -11,11 +11,11 @@ app = Flask(__name__)
 def index():
    return render_template('home.html')
 
-@app.route('/profile')
+@app.route('/createProfile')
 def profile():
-   return render_template('profile.html')
+   return render_template('createProfile.html')
 
-@app.route('/insert')
+@app.route('/viewProfile')
 def insert():
    return render_template('insert.html')
 
