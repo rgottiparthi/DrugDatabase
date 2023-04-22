@@ -12,8 +12,12 @@ def index():
    return render_template('home.html')
 
 @app.route('/createProfile')
-def profile():
+def createProfile():
    return render_template('createProfile.html')
+
+@app.route('/editProfile')
+def editProfile():
+   return render_template('editProfile.html')
 
 @app.route('/viewProfile')
 def viewProfile():
