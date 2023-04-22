@@ -28,11 +28,13 @@ cur.execute('''CREATE TABLE Products
                 FOREIGN KEY (D_Name) REFERENCES Drugs (D_Name)
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
+# indications table
 cur.execute("DROP TABLE IF EXISTS Indications")
 cur.execute('''CREATE TABLE Indications
                (I_Name TEXT PRIMARY KEY,
                 Description TEXT)''')
 
+# drugs - indications
 cur.execute("DROP TABLE IF EXISTS Treats")
 cur.execute('''CREATE TABLE Treats
                (D_Name TEXT,
@@ -43,16 +45,14 @@ cur.execute('''CREATE TABLE Treats
                 FOREIGN KEY (I_Name) REFERENCES Indications (I_Name)
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
+# users table
 cur.execute("DROP TABLE IF EXISTS User")
 cur.execute('''CREATE TABLE User
                (UserID TEXT PRIMARY KEY,
                 Age INT,
-                Sex TEXT,
-                Pregnancy TEXT,
-                Indication1 TEXT,
-                Indication2 TEXT,
-                Indication3 TEXT)''')
+                Sex TEXT)''')
 
+# drug - drug interactions
 cur.execute("DROP TABLE IF EXISTS Interacts")
 cur.execute('''CREATE TABLE Interacts
                (D_Name_1 TEXT,
@@ -64,6 +64,7 @@ cur.execute('''CREATE TABLE Interacts
                 FOREIGN KEY (D_Name_2) REFERENCES Drugs(D_Name)
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
+# user - drug
 cur.execute("DROP TABLE IF EXISTS Takes")
 cur.execute('''CREATE TABLE Takes
                (UserID TEXT PRIMARY KEY,
@@ -71,6 +72,7 @@ cur.execute('''CREATE TABLE Takes
                 FOREIGN KEY (D_Name) REFERENCES Drugs(D_Name)
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
+# user - indications
 cur.execute("DROP TABLE IF EXISTS Has")
 cur.execute('''CREATE TABLE Has
                (UserID TEXT,
@@ -86,73 +88,78 @@ import xml.etree.ElementTree as et
 import csv
 
 # Parsing the XML file
-tree = et.parse("drugData.xml")
+tree = et.parse("C:\\Users\\tinatian\\Documents\\full_database.xml")
 root = tree.getroot()
 
 # importing indications.csv file
-indications_file = open("indications.csv")
+indications_file = open("C:\\Users\\tinatian\\Documents\\indications.csv")
 contents = csv.reader(indications_file)
 cur.executemany("INSERT INTO Indications (I_Name, Description) VALUES (?, ?)", contents)
 conn.commit()
 
 # drugs data
-n = 0
 for drug in root:
-    if n < 3:
-        name = drug.find("{http://www.drugbank.ca}name").text
-        desc = drug.find("{http://www.drugbank.ca}description").text
-        toxicity = drug.find("{http://www.drugbank.ca}toxicity").text
-        indication = drug.find("{http://www.drugbank.ca}indication").text
-        cur.execute('''INSERT INTO Drugs (D_Name, Basic_Description, Toxicity, Indications) 
-                        VALUES (?, ?, ?, ?)''', (name, desc, toxicity, indication))
-        cur.execute("INSERT INTO Treats (D_Name) VALUES (?)", (name,))
-    n += 1
+    name = drug.find("{http://www.drugbank.ca}name").text
+    desc = drug.find("{http://www.drugbank.ca}description").text
+    toxicity = drug.find("{http://www.drugbank.ca}toxicity").text
+    indication = drug.find("{http://www.drugbank.ca}indication").text
+    cur.execute('''INSERT INTO Drugs (D_Name, Basic_Description, Toxicity, Indications) 
+                    VALUES (?, ?, ?, ?)''', (name, desc, toxicity, indication))
 conn.commit()
  
 
 # products data
-n = 0
 productID = 0
 for drug in root:
-    if n < 3:
-        name = drug.find("{http://www.drugbank.ca}name").text
-        products = drug.find("{http://www.drugbank.ca}products")
-        for product in products:
-            country = product.find("{http://www.drugbank.ca}country").text
-            if(country == 'US'):
-                p_name = product.find("{http://www.drugbank.ca}name").text
-                p_labeller = product.find("{http://www.drugbank.ca}labeller").text
-                p_marketing_start = product.find("{http://www.drugbank.ca}started-marketing-on").text
-                p_marketing_end = product.find("{http://www.drugbank.ca}ended-marketing-on").text
-                p_dosage = product.find("{http://www.drugbank.ca}dosage-form").text
-                p_strength = product.find("{http://www.drugbank.ca}strength").text
-                p_route = product.find("{http://www.drugbank.ca}route").text
-                p_generic = product.find("{http://www.drugbank.ca}generic").text
-                p_otc = product.find("{http://www.drugbank.ca}over-the-counter").text
-                cur.execute('''INSERT INTO Products (P_ID, P_Name, Form, Strength, Route, Manufacturer, 
-                                Marketing_start, Marketing_end, Generic, OTC, D_NAME) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
-                                (productID, p_name, p_dosage, p_strength, p_route, p_labeller, p_marketing_start, p_marketing_end,
-                                p_generic, p_otc, name))
-                productID += 1
-    n += 1
+    name = drug.find("{http://www.drugbank.ca}name").text
+    products = drug.find("{http://www.drugbank.ca}products")
+    for product in products:
+        country = product.find("{http://www.drugbank.ca}country").text
+        if(country == 'US'):
+            p_name = product.find("{http://www.drugbank.ca}name").text
+            p_labeller = product.find("{http://www.drugbank.ca}labeller").text
+            p_marketing_start = product.find("{http://www.drugbank.ca}started-marketing-on").text
+            p_marketing_end = product.find("{http://www.drugbank.ca}ended-marketing-on").text
+            p_dosage = product.find("{http://www.drugbank.ca}dosage-form").text
+            p_strength = product.find("{http://www.drugbank.ca}strength").text
+            p_route = product.find("{http://www.drugbank.ca}route").text
+            p_generic = product.find("{http://www.drugbank.ca}generic").text
+            p_otc = product.find("{http://www.drugbank.ca}over-the-counter").text
+            cur.execute('''INSERT INTO Products (P_ID, P_Name, Form, Strength, Route, Manufacturer, 
+                            Marketing_start, Marketing_end, Generic, OTC, D_NAME) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                            (productID, p_name, p_dosage, p_strength, p_route, p_labeller, p_marketing_start, p_marketing_end,
+                            p_generic, p_otc, name))
+            productID += 1
 conn.commit()
 
 
 # drug interactions data
-n = 0
 for drug in root:
-    if n < 3:
-        d1 = drug.find("{http://www.drugbank.ca}name").text
-        interactions = drug.find("{http://www.drugbank.ca}drug-interactions")
-        for i in interactions:
-            d2 = i.find("{http://www.drugbank.ca}name").text
-            i_desc = i.find("{http://www.drugbank.ca}description").text
-            cur.execute("INSERT INTO Interacts (D_Name_1, D_Name_2, I_Description) VALUES (?, ?, ?)",
-                        (d1, d2, i_desc))
-    n += 1
+    d1 = drug.find("{http://www.drugbank.ca}name").text
+    interactions = drug.find("{http://www.drugbank.ca}drug-interactions")
+    for i in interactions:
+        d2 = i.find("{http://www.drugbank.ca}name").text
+        i_desc = i.find("{http://www.drugbank.ca}description").text
+        cur.execute("INSERT INTO Interacts (D_Name_1, D_Name_2, I_Description) VALUES (?, ?, ?)",
+                    (d1, d2, i_desc))
 conn.commit()
 
-
+# treatment data
+for drug in root:
+    name = drug.find("{http://www.drugbank.ca}name").text
+    indication_desc = drug.find("{http://www.drugbank.ca}indication").text
+    i = 0
+    with open("C:\\Users\\tinatian\\Documents\\indications.csv", 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            if indication_desc is None:
+                break
+            if row[0] in indication_desc:
+                cur.execute("INSERT INTO Treats (D_Name, I_Name) VALUES (?, ?)", (name, row[0]))
+                i += 1
+    if i == 0:      
+        cur.execute("INSERT INTO Treats (D_Name, I_Name) VALUES (?, ?)", (name, "other"))
+conn.commit()
 
 res = cur.execute("SELECT * FROM Drugs")
 rec = res.fetchall()
@@ -160,6 +167,11 @@ for x in range(3):
     print(rec[x], "\n")
 
 res2 = cur.execute("SELECT * FROM Indications")
-rec2 = res.fetchall()
+rec2 = res2.fetchall()
 for x in range(3):
     print(rec2[x], "\n")
+
+res3 = cur.execute("SELECT * FROM Treats")
+rec3 = res3.fetchall()
+for x in range(10):
+    print(rec3[x], "\n")
