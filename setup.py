@@ -42,10 +42,9 @@ cur.execute('''CREATE TABLE Products
 #                    ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
 cur.execute('''CREATE TABLE User
-               (UserID TEXT PRIMARY KEY,
+               (Username TEXT PRIMARY KEY,
                 Age INT,
-                Sex TEXT
-                Pregnancy TEXT)''')
+                Sex TEXT)''')
 
 cur.execute('''CREATE TABLE Interacts
                (D_Name_1 TEXT,
