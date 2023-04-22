@@ -1,14 +1,24 @@
 import plotly.graph_objs as go
 import plotly.offline as pyo
 import networkx as nx
-import sqlite3
+import sqlite3 as sql
+
+# test case
+drugs = ['Lepirudin', 'Ibuprofen', 'Acetaminophen', 'Quinine', 'Azithromycin', 'Escitalopram', None, None, None, None]
+
 
 # Connect to the SQLite database
-conn = sqlite3.connect('drugData.db')
+conn = sql.connect('drugData.db')
 
 # Execute SQL query to retrieve drug interaction data
 cur = conn.cursor()
-cur.execute('SELECT D_Name_1, D_Name_2, I_Description FROM Interacts WHERE D_Name_1 = ? LIMIT 10', ("Ibuprofen",))
+#cur.execute('SELECT D_Name_1, D_Name_2, I_Description FROM Interacts WHERE D_Name_1 = ? LIMIT 10', ("Ibuprofen",))
+cur.execute('''SELECT D_Name_1, D_Name_2, I_Description
+                FROM Interacts
+                WHERE (D_Name_1 IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                AND D_Name_2 IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                AND D_Name_1 < D_Name_2)''', (drugs[0], drugs[1], drugs[2], drugs[3], drugs[4], drugs[5], drugs[6], drugs[7], drugs[8], drugs[9], drugs[0], drugs[1], drugs[2], drugs[3], drugs[4], drugs[5], drugs[6], drugs[7], drugs[8], drugs[9]))
+
 
 # Fetch the results and create a list of edges
 interactions = cur.fetchall()
