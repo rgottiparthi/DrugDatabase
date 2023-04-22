@@ -41,37 +41,58 @@
     
   <h2>Insert New Drug</h2>
   <form action="/submit-profile" method="post">
-    <label for="username">Drug Name:</label>
-    <input type="text" id="username" name="username" required />
+    <label for="drug name">Drug Name</label>
+    <input type="text" id="drug name" name="drug name" required />
     
-    <label for="age">Age</label>
-    <input type="number" id="age" name="age" required />
+    <label for="description">Basic Description</label>
+    <input type="text" id="description" name="description" />
     
-    <label for="sex">Sex</label>
-    <input type="radio" id="male" name="sex" value="male">
-    <label for="male">Male</label><br>
-    <input type="radio" id="female" name="sex" value="female">
-    <label for="female">Female</label><br>
+    <label for="toxicity">Toxicity</label>
+    <input type="text" id="toxicity" name="toxicity">
+
+    <label for="indications">Indications</label>
+    <input type="text" id="indications" name="indications">
     
-    <input type="submit" value="Create Profile" />
+    <label for="food interactions">Food Interactions</label>
+    <input type="text" id="food interactions" name="food interactions">
+
+    <input type="submit" value="Insert New Drug" />
     <p>  </p>
   </form>
 
+  <h2>Insert New Product</h2>
+  <form action="/submit-profile" method="post">
+    <label for="drug name">Product ID</label>
+    <input type="text" id="drug name" name="drug name" required />
+    
+    <label for="description">Basic Description</label>
+    <input type="text" id="description" name="description" />
+    
+    <label for="toxicity">Toxicity</label>
+    <input type="text" id="toxicity" name="toxicity">
+
+    <label for="indications">Indications</label>
+    <input type="text" id="indications" name="indications">
+    
+    <label for="food interactions">Food Interactions</label>
+    <input type="text" id="food interactions" name="food interactions">
+
+    <input type="submit" value="Insert New Drug" />
+    <p>  </p>
+  </form>
+
+  P_ID INTEGER PRIMARY KEY,
+  P_Name TEXT,
+  Form TEXT,
+  Strength TEXT,
+  Route TEXT,
+  Manufacturer TEXT,
+  Marketing_start DATE,
+  Marketing_end DATE,
+  Generic TEXT,
+  OTC TEXT,
+  D_NAME TEXT NOT NULL,
+
   {% endblock %}
-  <td>Drug Name:</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Basic Description:</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Toxicity:</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Indications:</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Food Interactions:</td>
+ 
+        
