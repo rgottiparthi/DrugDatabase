@@ -15,10 +15,6 @@ def index():
 def profile():
    return render_template('profile.html')
 
-@app.route('/aggregate')
-def aggregate():
-   return render_template('aggregate.html')
-
 @app.route('/insert')
 def insert():
    return render_template('insert.html')
