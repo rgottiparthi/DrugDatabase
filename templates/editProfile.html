@@ -39,39 +39,34 @@
       }
     </style>
     
-  <h2>Insert New Drug</h2>
+  <h2>Edit User Profile</h2>
   <form action="/submit-profile" method="post">
-    <label for="username">Drug Name:</label>
+    <label for="username">Username</label>
     <input type="text" id="username" name="username" required />
     
-    <label for="age">Age</label>
-    <input type="number" id="age" name="age" required />
+    <h3>Change your name, age, or sex</h3>
+    <label for="new username">New Username</label>
+    <input type="text" id="new username" name="new username" />
     
+    <label for="age">Age</label>
+    <input type="number" id="age" name="age" />
+
     <label for="sex">Sex</label>
     <input type="radio" id="male" name="sex" value="male">
     <label for="male">Male</label><br>
     <input type="radio" id="female" name="sex" value="female">
     <label for="female">Female</label><br>
+
+    <h3>Add a drug, indication, or a product</h3>
+    <label for="drug name">Drug Name</label>
+    <input type="text" id="drug name" name="drug name" />
+    <label for="indication name">Indication Name</label>
+    <input type="text" id="indication name" name="indication name" />
+    <label for="Prodcut name">Product Name</label>
+    <input type="text" id="product name" name="prodcut name name" />
     
-    <input type="submit" value="Create Profile" />
+    <input type="submit" value="Save Profile" />
     <p>  </p>
   </form>
 
   {% endblock %}
-  <td>Drug Name:</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Basic Description:</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Toxicity:</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Indications:</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Food Interactions:</td>
