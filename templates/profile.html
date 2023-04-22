@@ -35,6 +35,14 @@
         text-transform: uppercase;
       }
 
+      nav b {
+        color: #333;
+	      font-weight: bold;
+        margin-right: 20px;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
       nav a:hover {
         color: #3f51b5;
       }
@@ -99,25 +107,20 @@
       <a href="/profile">User Profile</a>
 	    <b>|</b>
       <a href="/search">Search</a>
-	    <b>|</b>
-      <a href="/aggregate">Aggregate Queries</a>
     </nav>
 
     <main>
       <h2>Create User Profile</h2>
-      <form>
+      <form action="/submit-profile" method="post">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" required />
-
+    
         <label for="age">Age</label>
-        <input type="text" id="age" name="age" required />
-
-        <label for="Sex">Sex</label>
+        <input type="number" id="age" name="age" required />
+    
+        <label for="sex">Sex</label>
         <input type="text" id="sex" name="sex" required />
-
-	  <label for="Pregnancy (Y or N)">Password</label>
-        <input type="text" id="pregnancy" name="pregnancy" required />
-
+    
         <input type="submit" value="Create Profile" />
       </form>
     </main>

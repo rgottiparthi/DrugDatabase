@@ -41,7 +41,7 @@ cur.execute('''CREATE TABLE Treats
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
 cur.execute('''CREATE TABLE User
-               (UserID TEXT PRIMARY KEY,
+               (Username TEXT PRIMARY KEY,
                 Age INT,
                 Sex TEXT)''')
 
