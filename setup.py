@@ -98,7 +98,7 @@ conn.commit()
 # drugs data
 n = 0
 for drug in root:
-    if n < 10:
+    if n < 3:
         name = drug.find("{http://www.drugbank.ca}name").text
         desc = drug.find("{http://www.drugbank.ca}description").text
         toxicity = drug.find("{http://www.drugbank.ca}toxicity").text
@@ -114,7 +114,7 @@ conn.commit()
 n = 0
 productID = 0
 for drug in root:
-    if n < 10:
+    if n < 3:
         name = drug.find("{http://www.drugbank.ca}name").text
         products = drug.find("{http://www.drugbank.ca}products")
         for product in products:
@@ -141,7 +141,7 @@ conn.commit()
 # drug interactions data
 n = 0
 for drug in root:
-    if n < 10:
+    if n < 3:
         d1 = drug.find("{http://www.drugbank.ca}name").text
         interactions = drug.find("{http://www.drugbank.ca}drug-interactions")
         for i in interactions:
