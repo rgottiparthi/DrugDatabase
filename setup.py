@@ -26,20 +26,19 @@ cur.execute('''CREATE TABLE Products
                 FOREIGN KEY (D_Name) REFERENCES Drugs (D_Name)
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
-#conn.execute('''CREATE TABLE Indications
-#               (I_Name TEXT,
-#                Severity TEXT,
-#                Description TEXT
-#                    ON DELETE CASCADE ON UPDATE NO ACTION)''')
+cur.execute('''CREATE TABLE Indications
+               (I_Name TEXT,
+                Description TEXT,
+                    ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
-#conn.execute('''CREATE TABLE Treats
-#               (D_Name TEXT,
-#                I_Name TEXT,
-#                PRIMARY KEY(D_Name_1, D_Name_2),
-#                FOREIGN KEY (D_Name_1)
-#                    ON DELETE CASCADE ON UPDATE NO ACTION,
-#                FOREIGN KEY (I_Name_2)
-#                    ON DELETE CASCADE ON UPDATE NO ACTION)''')
+cur.execute('''CREATE TABLE Treats
+               (D_Name TEXT,
+                I_Name TEXT,
+                PRIMARY KEY(D_Name_1, D_Name_2),
+                FOREIGN KEY (D_Name_1)
+                    ON DELETE CASCADE ON UPDATE NO ACTION,
+                FOREIGN KEY (I_Name_2)
+                    ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
 cur.execute('''CREATE TABLE User
                (Username TEXT PRIMARY KEY,
@@ -62,13 +61,13 @@ cur.execute('''CREATE TABLE Takes
                 FOREIGN KEY (D_Name) REFERENCES Drugs(D_Name)
                     ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
-#conn.execute('''CREATE TABLE Has
-#               (UserID TEXT,
-#                I_Name TEXT,
-#                FOREIGN KEY (UserID)
-#                    ON DELETE CASCADE ON UPDATE NO ACTION,
-#                FOREIGN KEY (I_Name)
-#                    ON DELETE CASCADE ON UPDATE NO ACTION)''')
+cur.execute('''CREATE TABLE Has
+               (UserID TEXT,
+                I_Name TEXT,
+                FOREIGN KEY (UserID)
+                    ON DELETE CASCADE ON UPDATE NO ACTION,
+                FOREIGN KEY (I_Name)
+                    ON DELETE CASCADE ON UPDATE NO ACTION)''')
 
 
 import xml.etree.ElementTree as et
