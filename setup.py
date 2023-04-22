@@ -98,14 +98,13 @@ conn.commit()
 # drugs data
 n = 0
 for drug in root:
-    if n < 3:
+    if n < 10:
         name = drug.find("{http://www.drugbank.ca}name").text
         desc = drug.find("{http://www.drugbank.ca}description").text
         toxicity = drug.find("{http://www.drugbank.ca}toxicity").text
         indication = drug.find("{http://www.drugbank.ca}indication").text
         cur.execute('''INSERT INTO Drugs (D_Name, Basic_Description, Toxicity, Indications) 
                         VALUES (?, ?, ?, ?)''', (name, desc, toxicity, indication))
-        cur.execute("INSERT INTO Treats (D_Name) VALUES (?)", (name,))
     n += 1
 conn.commit()
  
@@ -114,7 +113,7 @@ conn.commit()
 n = 0
 productID = 0
 for drug in root:
-    if n < 3:
+    if n < 10:
         name = drug.find("{http://www.drugbank.ca}name").text
         products = drug.find("{http://www.drugbank.ca}products")
         for product in products:
@@ -141,7 +140,7 @@ conn.commit()
 # drug interactions data
 n = 0
 for drug in root:
-    if n < 3:
+    if n < 10:
         d1 = drug.find("{http://www.drugbank.ca}name").text
         interactions = drug.find("{http://www.drugbank.ca}drug-interactions")
         for i in interactions:
@@ -163,3 +162,15 @@ res2 = cur.execute("SELECT * FROM Indications")
 rec2 = res.fetchall()
 for x in range(3):
     print(rec2[x], "\n")
+
+
+n = 0
+for drug in root:
+    if n < 10:
+        name = drug.find("{http://www.drugbank.ca}name").text
+        indication_desc = drug.find("{http://www.drugbank.ca}indication").text
+        for row in content:
+            if row[0] in indication_desc:
+                cur.execute("INSERT INTO Treats (D_Name, I_Name) VALUES (?, ?)", (name, row[0]))
+    n += 1
+conn.commit()
