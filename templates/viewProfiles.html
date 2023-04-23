@@ -1,9 +1,8 @@
     {% extends 'base.html' %}
 
-    {% block title %}Create User Profile{% endblock %}
+    {% block title %}View User Profiles{% endblock %}
 
     {% block content %}
-        <title>View User Profiles</title>
     <body>
         <main>
         <h2>View User Profiles</h2>
@@ -29,12 +28,18 @@
             <th>Name:</th>
             <th>Age:</th>
             <th>Sex:</th>
+            <th>Taking:</th>
+            <th>Has:</th>
         </tr>
         {% for i in range(numUser) %}
         <tr>
             <td>{{ users[i][0] }}</td>
             <td>{{ users[i][1] }}</td>
             <td>{{ users[i][2] }}</td>
+            {% for i in range(numDrugs) %}
+            <td>{{ drugs[i][0] }}, </td>
+            {% for i in range(numIndications) %}
+            <td>{{ indications[i][0] }}, </td>
         </tr>
         {% endfor %}
         </table>
