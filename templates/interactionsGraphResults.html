@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Create User Profile{% endblock %}
+
+{% block content %}
+
+<iframe src="drug_interaction_graph.html" width="100%" height="500"></iframe>
+
+<h2>Interaction Descriptions</h2>      
+      <body>
+        <table>
+            <tr>
+                <th>Drug 1 Name:</th>
+                <th>Drug 2 Name:</th>
+                <th>Interaction Description:</th>
+            </tr>
+            <tr>
+                {% for i in range(numInteractions) %}
+                <td>{{ interactions[i][0] }}</td>
+                <td>{{ interactions[i][1] }}</td>
+                <td>{{ interactions[i][2] }}</td>
+            </tr>
+        </table>
+    </body>
+
+    {% endblock %}
