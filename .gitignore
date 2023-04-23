@@ -2,3 +2,4 @@ drugData.xml
 indications.csv
 example_data
 drugData.db
+drug_interaction_graph
