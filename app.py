@@ -55,8 +55,29 @@ def submit_profile():
          return render_template("home.html")
          con.close()
 
+@app.route('/drug-result', methods=['POST', 'GET'])
+def drugResult():
+    if request.method == 'POST':
+        drugName = request.form['Drug Name']
 
+        # connect to the database and acquire a "cursor"
+        with sql.connect("drugData.db") as con:
+            cur = con.cursor()
+            cur.execute("SELECT * FROM Drugs WHERE D_Name = ?", (drugName,))
+            result = cur.fetchone()
 
+            if result:
+                # unpack the result tuple into individual variables
+                drugName, basicDescription, toxicity, indications = result
+
+                # fill in the values in the HTML table
+                return render_template("drugResults.html",
+                                       drugName=drugName,
+                                       basicDescription=basicDescription,
+                                       toxicity=toxicity,
+                                       indications=indications)
+            else:
+                return "No results found for this drug name."
 
 if __name__ == '__main__':
    app.run(debug = True)

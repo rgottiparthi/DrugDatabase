@@ -34,50 +34,39 @@
     </style>
 <body>
   
-  <h1>Drug Search Results</h1>
-      
-      <p>Do some kind of python code to display different attribute names based on which search was used</p>
-      
-<body>
-    <h3>Attributes for Drugs</h3>
-    <table>
-        <tr>
-            <th>Attribute</th>
-            <th>Value</th>
-        </tr>
-        <tr>
-            <td>Drug Name:</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Basic Description:</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Toxicity:</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Indications:</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Food Interactions:</td>
-            <td></td>
-        </tr>
-        <tr>
-          <td>Number of products:</td>
-          <td></td>
-      </tr>
-    </table>
+  <h1>Drug Search Results</h1>      
+      <body>
+        <h3>Attributes for Drugs</h3>
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Drug Name:</td>
+                <td>{{ drugName }}</td>
+            </tr>
+            <tr>
+                <td>Basic Description:</td>
+                <td>{{ basicDescription }}</td>
+            </tr>
+            <tr>
+                <td>Toxicity:</td>
+                <td>{{ toxicity }}</td>
+            </tr>
+            <tr>
+                <td>Indications:</td>
+                <td>{{ indications }}</td>
+            </tr>
+        </table>
         <form>
-          <input type="submit" value="Update this entry"/>
-          <p> </p>
-          <input type="submit" value="Save Updates"/>
-          <p> </p>
-          <input type="submit" value="Delete this entry"/>
-          <p> </p>
+            <input type="submit" value="Update this entry" />
+            <p> </p>
+            <input type="submit" value="Save Updates" />
+            <p> </p>
+            <input type="submit" value="Delete this entry" />
+            <p> </p>
         </form>
-</body>
+    </body>
 
-
+{% endblock %}
