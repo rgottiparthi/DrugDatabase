@@ -23,11 +23,18 @@ def editProfile():
 def viewProfiles():
    conn = sql.connect('drugData.db')
    cur = conn.cursor()
-   cur.execute('''SELECT COUNT(UserID) FROM User''')
-   numUser = cur.fetchone()[0]
-   cur.execute('''SELECT UserID, Age, Sex FROM User''')
+   
+   cur.execute('''
+      SELECT u.UserID, u.Age, u.Sex, t.D_Name, h.I_Name 
+      FROM User u
+      LEFT JOIN Takes t ON u.UserID = t.UserID
+      LEFT JOIN Has h ON u.UserID = h.UserID
+   ''')
+   
    users = cur.fetchall()
-   return render_template('viewProfiles.html', numUser = numUser, users = users)
+   numUser = len(users)
+   
+   return render_template('viewProfiles.html', numUser=numUser, users=users)
 
 
 @app.route('/search')
@@ -52,7 +59,7 @@ def submit_profile():
          con.rollback()
       
       finally:
-         return render_template("viewProfiles.html")
+         return render_template("home.html")
          con.close()
 
 @app.route('/update-profile',methods = ['POST', 'GET'])
