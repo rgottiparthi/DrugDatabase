@@ -91,17 +91,17 @@ def update_profile():
          new_indication = request.form.get('indication name')
 
          # insert the form values in the database
+         new_drug = request.form.get('drug name')
          if new_drug:
-            cur.execute("SELECT * FROM Drugs WHERE D_Name = ?", (new_drug,) )
-            result = cur.fetchone()
-            if result:
-               cur.execute("INSERT OR IGNORE INTO Takes (UserID, D_Name) VALUES (?,?)", (new_username, new_drug,) )
-         
+            cur.execute("SELECT D_Name FROM Drugs WHERE D_Name = ?", (new_drug,) )
+            d_id = cur.fetchone()[0]
+            cur.execute("INSERT INTO Takes (UserID, D_Name) VALUES (?,?)", (username, d_id,) )
+
+         new_indication = request.form.get('indication name')
          if new_indication:
-            cur.execute("SELECT * FROM Indications WHERE I_Name = ?", (new_indication,) )
-            result = cur.fetchone()
-            if result:
-               cur.execute("INSERT OR IGNORE INTO Has (User_ID, I_Name) VALUES (?,?)", (new_username, new_indication,) )
+            cur.execute("SELECT I_Name FROM Indications WHERE I_Name = ?", (new_indication,) )
+            i_id = cur.fetchone()[0]
+            cur.execute("INSERT INTO Has (UserID, I_Name) VALUES (?,?)", (username, i_id,) )
 
          con.commit()
       except:
