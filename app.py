@@ -173,24 +173,12 @@ def deleteProfile():
 @app.route('/graph', methods=['POST', 'GET'])
 def graph():
    if request.method == 'POST':
-      try:
-         username = request.form['username']
-         age = int(request.form['age'])
-         sex = request.form['sex']
-
-         # connect to the database and aquire a "cursor"
-         with sql.connect("drugData.db") as con:
-            cur = con.cursor()
-            # insert the form values in the database
-            cur.execute("INSERT INTO User (UserID, Age, Sex) VALUES (?,?,?)",(username, age, sex) )
-            con.commit()
-      except:
-         con.rollback()
-      
-      finally:
-         return render_template("home.html")
-         con.close()
-
+      drugs = []
+      for i in range(10):
+         drug_name = request.form.get(f"Drug {i+1} Name")
+         if drug_name:
+               drugs.append(drug_name)
+      return render_template("interactionsGraph.html")
 
 if __name__ == '__main__':
    app.run(debug = True)
