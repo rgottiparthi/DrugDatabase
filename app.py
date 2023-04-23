@@ -59,39 +59,42 @@ def submit_profile():
 def update_profile():
    if request.method == 'POST':
       try:
-         # connect to the database and aquire a "cursor"
+         # connect to the database and acquire a "cursor"
          with sql.connect("drugData.db") as con:
             cur = con.cursor()
 
          username = request.form['username']
+         print(username)
+         new_username = request.form.get('new username')
+         print(new_username)
+         if new_username:
+            cur.execute("UPDATE User SET UserID = ? WHERE UserID = ?", (new_username, username,))
+            cur.execute("SELECT UserID FROM User")
+         new_age = request.form.get('age')
+         if new_age:
+            new_age = int(new_age)
+            cur.execute("UPDATE User SET Age = ? WHERE UserID = ?", (new_age, new_username,))
+         
+         new_sex = request.form.get('sex')
+         if new_sex:
+            cur.execute("UPDATE User SET Sex = ? WHERE UserID = ?", (new_sex, new_username,))
 
-         new_username = request.form['new username']
-         if new_username == '':
-            new_username = username
 
-         new_age = int(request.form['age'])
-         if new_age == '':
-            new_age = cur.execute("SELECT Age FROM User WHERE UserID = ?", (new_username) )
-
-         new_sex = request.form['sex']
-         if new_sex == '':
-            new_age = cur.execute("SELECT Sex FROM User WHERE UserID = ?", (new_username) )
-
-         new_drug = request.form['drug name']
-         new_indication = request.form['indication name']
+         new_drug = request.form.get('drug name')
+         new_indication = request.form.get('indication name')
 
          # insert the form values in the database
-         cur.execute("UPDATE Users SET UserID = ?, Age = ?, Sex = ? WHERE UserID = ?", (new_username, new_age, new_sex, username) )
-
-         cur.execute("SELECT * FROM Drugs WHERE D_Name = ?", (new_drug) )
-         result = cur.fetchone()
-         if result:
-            cur.execute("INSERT INTO IF NOT EXISTS Takes (UserID, D_Name) VALUES (?,?)", (new_username, new_drug) )
+         if new_drug:
+            cur.execute("SELECT * FROM Drugs WHERE D_Name = ?", (new_drug,) )
+            result = cur.fetchone()
+            if result:
+               cur.execute("INSERT OR IGNORE INTO Takes (UserID, D_Name) VALUES (?,?)", (new_username, new_drug,) )
          
-         cur.execute("SELECT * FROM Indications WHERE I_Name = ?", (new_indication) )
-         result = cur.fetchone()
-         if result:
-            cur.execute("INSERT INTO IF NOT EXISTS Has (User_ID, I_Name) VALUES (?,?)", (new_username, new_indication) )
+         if new_indication:
+            cur.execute("SELECT * FROM Indications WHERE I_Name = ?", (new_indication,) )
+            result = cur.fetchone()
+            if result:
+               cur.execute("INSERT OR IGNORE INTO Has (User_ID, I_Name) VALUES (?,?)", (new_username, new_indication,) )
 
          con.commit()
       except:
@@ -99,7 +102,7 @@ def update_profile():
       
       finally:
          con.close()
-         return render_template("viewProfiles.html")
+         return render_template("home.html")
          
 @app.route('/drug-result', methods=['POST', 'GET'])
 def drugResult():
