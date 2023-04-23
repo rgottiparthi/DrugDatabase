@@ -69,4 +69,11 @@
     <p>  </p>
   </form>
 
+  <h2>Delete User Profile</h2>
+  <form action="/delete-profile" method="post">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" required />
+    <input type="submit" value="Delete Profile" />
+  </form>
+
   {% endblock %}
