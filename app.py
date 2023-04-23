@@ -19,15 +19,15 @@ def createProfile():
 def editProfile():
    return render_template('editProfile.html')
 
-@app.route('/viewProfile')
-def viewProfile():
+@app.route('/viewProfiles')
+def viewProfiles():
    conn = sql.connect('drugData.db')
    cur = conn.cursor()
    cur.execute('''SELECT COUNT(UserID) FROM User''')
    numUser = cur.fetchone()[0]
    cur.execute('''SELECT UserID, Age, Sex FROM User''')
    users = cur.fetchall()
-   return render_template('viewProfile.html', numUser = numUser, users = users)
+   return render_template('viewProfiles.html', numUser = numUser, users = users)
 
 
 @app.route('/search')
@@ -52,9 +52,55 @@ def submit_profile():
          con.rollback()
       
       finally:
-         return render_template("home.html")
+         return render_template("viewProfiles.html")
          con.close()
 
+@app.route('/update-profile',methods = ['POST', 'GET'])
+def update_profile():
+   if request.method == 'POST':
+      try:
+         # connect to the database and aquire a "cursor"
+         with sql.connect("drugData.db") as con:
+            cur = con.cursor()
+
+         username = request.form['username']
+
+         new_username = request.form['new username']
+         if new_username == '':
+            new_username = username
+
+         new_age = int(request.form['age'])
+         if new_age == '':
+            new_age = cur.execute("SELECT Age FROM User WHERE UserID = ?", (new_username) )
+
+         new_sex = request.form['sex']
+         if new_sex == '':
+            new_age = cur.execute("SELECT Sex FROM User WHERE UserID = ?", (new_username) )
+
+         new_drug = request.form['drug name']
+         new_indication = request.form['indication name']
+
+         # insert the form values in the database
+         cur.execute("UPDATE Users SET UserID = ?, Age = ?, Sex = ? WHERE UserID = ?", (new_username, new_age, new_sex, username) )
+
+         cur.execute("SELECT * FROM Drugs WHERE D_Name = ?", (new_drug) )
+         result = cur.fetchone()
+         if result:
+            cur.execute("INSERT INTO IF NOT EXISTS Takes (UserID, D_Name) VALUES (?,?)", (new_username, new_drug) )
+         
+         cur.execute("SELECT * FROM Indications WHERE I_Name = ?", (new_indication) )
+         result = cur.fetchone()
+         if result:
+            cur.execute("INSERT INTO IF NOT EXISTS Has (User_ID, I_Name) VALUES (?,?)", (new_username, new_indication) )
+
+         con.commit()
+      except:
+         con.rollback()
+      
+      finally:
+         con.close()
+         return render_template("viewProfiles.html")
+         
 @app.route('/drug-result', methods=['POST', 'GET'])
 def drugResult():
     if request.method == 'POST':
@@ -78,6 +124,7 @@ def drugResult():
                                        indications=indications)
             else:
                 return "No results found for this drug name."
+
 
 if __name__ == '__main__':
    app.run(debug = True)
