@@ -155,5 +155,16 @@ def productResult():
             else:
                 return "No results found for this drug name."
 
+@app.route('/delete-profile', methods=['POST', 'GET'])
+def deleteProfile():
+   if request.method == 'POST':
+        username = request.form['username']
+
+        # connect to the database and acquire a "cursor"
+        with sql.connect("drugData.db") as con:
+            cur = con.cursor()
+            cur.execute('''DELETE FROM User WHERE UserID = ?;''', (username,))
+            return render_template("home.html")
+
 if __name__ == '__main__':
    app.run(debug = True)
