@@ -1,47 +1,41 @@
-    {% extends 'base.html' %}
+{% extends 'base.html' %}
 
-    {% block title %}View User Profiles{% endblock %}
+{% block title %}View User Profiles{% endblock %}
 
-    {% block content %}
-    <body>
-        <main>
-        <h2>View User Profiles</h2>
-        <style>
-            table {
-                border-collapse: collapse;
-                justify-content: center;
-                width: 75%;
-            }
-            th, td {
-                border: 1px solid black;
-                padding: 8px;
-                text-align: left;
-            }
-            th {
-                background-color: lightgray;
-            }
-        </style>
-        <p>There are currently {{ numUser }} users</p>
-        <h2>User Profile</h2>
-        <table>
-        <tr>
-            <th>Name:</th>
-            <th>Age:</th>
-            <th>Sex:</th>
-            <th>Taking:</th>
-            <th>Has:</th>
-        </tr>
-        {% for i in range(numUser) %}
-        <tr>
-            <td>{{ users[i][0] }}</td>
-            <td>{{ users[i][1] }}</td>
-            <td>{{ users[i][2] }}</td>
-            {% for i in range(numDrugs) %}
-            <td>{{ drugs[i][0] }}, </td>
-            {% for i in range(numIndications) %}
-            <td>{{ indications[i][0] }}, </td>
-        </tr>
-        {% endfor %}
-        </table>
-        </main>
-        {% endblock %}
+{% block content %}
+<body>
+    <main>
+    <h2>View User Profiles</h2>
+    <style>
+        table {
+            border-collapse: collapse;
+            justify-content: center;
+            width: 75%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: lightgray;
+        }
+    </style>
+    <p>There are currently {{ numUser }} users</p>
+    <h2>User Profile</h2>
+    <table>
+    <tr>
+        <th>Name:</th>
+        <th>Age:</th>
+        <th>Sex:</th>
+    </tr>
+    {% for i in range(numUser) %}
+    <tr>
+        <td>{{ users[i][0] }}</td>
+        <td>{{ users[i][1] }}</td>
+        <td>{{ users[i][2] }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+    </main>
+    {% endblock %}
