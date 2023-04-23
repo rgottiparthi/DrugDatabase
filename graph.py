@@ -54,7 +54,7 @@ fig = go.Figure(data=edge_trace + [node_trace],
                     title='<br>Drug Interaction Graph',
                     titlefont_size=16,
                     showlegend=True,
-                    hovermode=False,
+                    hovermode='closest',
                     margin=dict(b=20, l=5, r=5, t=40),
                     xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
                     yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)))
