@@ -128,6 +128,25 @@ def drugResult():
             else:
                 return "No results found for this drug name."
 
+@app.route('/product-result', methods=['POST', 'GET'])
+def productResult():
+   if request.method == 'POST':
+        productName = request.form['Product Name']
+
+        # connect to the database and acquire a "cursor"
+        with sql.connect("drugData.db") as con:
+            cur = con.cursor()
+            cur.execute('''SELECT Products.*, Drugs.Basic_Description, Drugs.Toxicity, Drugs.Indications
+                           FROM Products
+                           JOIN Drugs ON Products.D_Name = Drugs.D_Name;''', (productName,))
+            result = cur.fetchall()
+
+            if result:
+
+                # fill in the values in the HTML table
+                return render_template("productResults.html")
+            else:
+                return "No results found for this drug name."
 
 if __name__ == '__main__':
    app.run(debug = True)
