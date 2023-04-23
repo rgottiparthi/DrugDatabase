@@ -24,34 +24,10 @@ def viewProfiles():
    conn = sql.connect('drugData.db')
    cur = conn.cursor()
    cur.execute('''SELECT COUNT(UserID) FROM User''')
-
    numUser = cur.fetchone()[0]
-   numDrugs = list
-   numIndications = list
-
-   cur.execute('''SELECT UserID FROM User''')
-   UserIDs = cur.fetchall()
-
-   for UserIDs in users:
-      cur.execute('''SELECT COUNT(D_Name) FROM Takes WHERE UserID = ?''', (UserIDs,))
-      userTakes = cur.fetchall()
-      numDrugs.insert(userTakes)
-
-   for UserIDs in users:
-      cur.execute('''SELECT COUNT(I_Name) FROM Takes WHERE UserID = ?''', (UserIDs,))
-      userHas = cur.fetchall()
-      numIndications.insert(userHas)
-
    cur.execute('''SELECT UserID, Age, Sex FROM User''')
    users = cur.fetchall()
-
-   cur.execute('''SELECT D_Name FROM Takes''', ())
-   drugs = cur.fetchall()
-
-   cur.execute('''SELECT I_Name FROM Has''', ())
-   indications = cur.fetchall()
-
-   return render_template('viewProfiles.html', numUser = numUser, users = users, drugs = drugs, numDrugs = numDrugs, indications=indications, numIndications=numIndications)
+   return render_template('viewProfiles.html', numUser = numUser, users = users)
 
 
 @app.route('/search')
