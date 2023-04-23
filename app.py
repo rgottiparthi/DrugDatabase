@@ -41,6 +41,10 @@ def viewProfiles():
 def search():
    return render_template('search.html')
 
+@app.route('/interactionsGraph')
+def inputGraph():
+   return render_template('interactionsGraph.html')
+
 @app.route('/submit-profile',methods = ['POST', 'GET'])
 def submit_profile():
    if request.method == 'POST':
@@ -165,6 +169,28 @@ def deleteProfile():
             cur = con.cursor()
             cur.execute('''DELETE FROM User WHERE UserID = ?;''', (username,))
             return render_template("home.html")
+
+@app.route('/graph', methods=['POST', 'GET'])
+def graph():
+   if request.method == 'POST':
+      try:
+         username = request.form['username']
+         age = int(request.form['age'])
+         sex = request.form['sex']
+
+         # connect to the database and aquire a "cursor"
+         with sql.connect("drugData.db") as con:
+            cur = con.cursor()
+            # insert the form values in the database
+            cur.execute("INSERT INTO User (UserID, Age, Sex) VALUES (?,?,?)",(username, age, sex) )
+            con.commit()
+      except:
+         con.rollback()
+      
+      finally:
+         return render_template("home.html")
+         con.close()
+
 
 if __name__ == '__main__':
    app.run(debug = True)

@@ -56,38 +56,14 @@
     <main>
       <h1>See How Up To 10 Drugs Interact</h1>
       <p>At least two drugs are required to create a graph.</p>
-      <form action="/drug-result" method="post">
-        <label for="Drug 1 Name">Drug 1 Name:</label>
-        <input type="text" id="Drug 1 Name" name="Drug 1 Name" required />
-  
-        <label for="Drug 2 Name">Drug 2 Name:</label>
-        <input type="text" id="Drug 2 Name" name="Drug 2 Name" required />
-  
-        <label for="Drug 3 Name">Drug 3 Name:</label>
-        <input type="text" id="Drug 3 Name" name="Drug 3 Name"/>
-
-        <label for="Drug 4 Name">Drug 4 Name:</label>
-        <input type="text" id="Drug 4 Name" name="Drug 4 Name"/>
-
-        <label for="Drug 5 Name">Drug 5 Name:</label>
-        <input type="text" id="Drug 5 Name" name="Drug 5 Name"/>
-
-        <label for="Drug 6 Name">Drug 6 Name:</label>
-        <input type="text" id="Drug 6 Name" name="Drug 6 Name"/>
-
-        <label for="Drug 7 Name">Drug 7 Name:</label>
-        <input type="text" id="Drug 7 Name" name="Drug 7 Name"/>
-
-        <label for="Drug 8 Name">Drug 8 Name:</label>
-        <input type="text" id="Drug 8 Name" name="Drug 8 Name"/>
-
-        <label for="Drug 9 Name">Drug 9 Name:</label>
-        <input type="text" id="Drug 9 Name" name="Drug 9 Name"/>
-
-        <label for="Drug 10 Name">Drug 10 Name:</label>
-        <input type="text" id="Drug 10 Name" name="Drug 10 Name"/>
+      <form action="/graph" method="post">
+        {% for i in range(10) %}
+        <label for="Drug {{i+1}} Name">Drug {{i+1}} Name:</label>
+        <input type="text" id="Drug {{i+1}} Name" name="Drug {{i+1}} Name" {% if i==0 or i==1 %}required{% endif %} />
+        {% endfor %}
         <input type="submit" value="Create Graph" />
       </form>
-     </body>
+    </main>
+  </body>
     </main>
     {% endblock %}
