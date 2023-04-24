@@ -36,53 +36,69 @@
     }
   </style>
 
-  <h1>Product Search Results</h1>
+<h1>Product Search Results</h1>
 
-  {% if result %}
-  {% for product in result %}
-  <h3>Attributes for Product "{{ product[0] }}"</h3>
-  <table>
-    <tr>
-      <th>Attribute</th>
-      <th>Value</th>
-    </tr>
-    <tr>
-      <td>Product Name:</td>
-      <td>{{ product[0] }}</td>
-    </tr>
-    <tr>
-      <td>Form:</td>
-      <td>{{ product[1] }}</td>
-    </tr>
-    <tr>
-      <td>Strength:</td>
-      <td>{{ product[2] }}</td>
-    </tr>
-    <tr>
-      <td>Route:</td>
-      <td>{{ product[3] }}</td>
-    </tr>
-    <tr>
-      <td>Manufacturer:</td>
-      <td>{{ product[4] }}</td>
-    </tr>
-    <tr>
-      <td>Marketing Start:</td>
-      <td>{{ product[5] }}</td>
-    </tr>
-    <tr>
-      <td>Marketing End:</td>
-      <td>{{ product[6] }}</td>
-    </tr>
-    <tr>
-      <td>Generic:</td>
-      <td>{{ product[7] }}</td>
-    </tr>
-    <tr>
-      <td>OTC:</td>
-      <td>{{ product[8] }}</td>
-    </tr>
-  </table>
-  {% endfor %}
-  {% endif %}
+{% if result %}
+{% for product in result %}
+<h3>Attributes for Product "{{ product[1] }}"</h3>
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>Product Name:</td>
+    <td>{{ product[1] }}</td>
+  </tr>
+  <tr>
+    <td>Form:</td>
+    <td>{{ product[2] }}</td>
+  </tr>
+  <tr>
+    <td>Strength:</td>
+    <td>{{ product[3] }}</td>
+  </tr>
+  <tr>
+    <td>Route:</td>
+    <td>{{ product[4] }}</td>
+  </tr>
+  <tr>
+    <td>Manufacturer:</td>
+    <td>{{ product[5] }}</td>
+  </tr>
+  <tr>
+    <td>Marketing Start:</td>
+    <td>{{ product[6] }}</td>
+  </tr>
+  <tr>
+    <td>Marketing End:</td>
+    <td>{{ product[7] }}</td>
+  </tr>
+  <tr>
+    <td>Generic:</td>
+    <td>{{ product[8] }}</td>
+  </tr>
+  <tr>
+    <td>OTC:</td>
+    <td>{{ product[9] }}</td>
+  </tr>
+  <tr>
+    <td>Drug Name:</td>
+    <td>{{ product[10] }}</td>
+  </tr>
+  <tr>
+    <td>Basic Description:</td>
+    <td>{{ product[11] }}</td>
+  </tr>
+  <tr>
+    <td>Toxicity:</td>
+    <td>{{ product[12] }}</td>
+  </tr>
+  <tr>
+    <td>Indications:</td>
+    <td>{{ product[13] }}</td>
+  </tr>
+</table>
+{% endfor %}
+{% endif %}
 {% endblock %}

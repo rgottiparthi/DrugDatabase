@@ -156,14 +156,10 @@ def product():
                            WHERE Products.P_Name = ?;''', (productName,))
             result = cur.fetchall()
 
-            if result:
-                  # fill in the values in the HTML table
-                  attributes = ["Product Name", "Form", "Strength", "Route", "Manufacturer", "Marketing Start",
-                              "Marketing End", "Generic", "OTC"]
-                  product_data = result[0]
-                  return render_template("productResults.html", attributes=attributes, product_data=product_data)
+            if result:   
+               return render_template("productResults.html", result = result)
             else:
-                  return "No results found for this product name."
+               return "No results found for this product name."
 
 @app.route('/delete-profile', methods=['POST', 'GET'])
 def deleteProfile():
