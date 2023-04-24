@@ -119,22 +119,6 @@ def update_profile():
             i_id = cur.fetchone()[0]
             cur.execute("INSERT INTO Has (UserID, I_ID) VALUES (?,?)", (new_username, i_id,) )
 
-
-         remove_drug = request.form.get('remove drug name')
-         remove_indication = request.form.get('remove indication name')
-
-         # delete the form values in the database
-         if new_drug:
-            cur.execute("SELECT D_Name FROM Drugs WHERE D_Name = ?", (remove_drug,) )
-            d_id = cur.fetchone()[0]
-            cur.execute("DELETE FROM Takes (UserID, D_Name) VALUES (?,?)", (new_username, d_id,) )
-
-
-         if remove_indication:
-            cur.execute("SELECT I_Name FROM Indications WHERE I_Name = ?", (remove_indication,) )
-            i_id = cur.fetchone()[0]
-            cur.execute("DELETE FROM Has (UserID, I_Name) VALUES (?,?)", (new_username, i_id,) )
-
          con.commit()
       except:
          con.rollback()
