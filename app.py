@@ -202,9 +202,11 @@ def graph():
       # Fetch the results and create a list of edges
       interactions = cur.fetchall()
 
+      numInteractions = 0
       # Create the graph
       G = nx.Graph()
       for interaction in interactions:
+         numInteractions += 1
          D_Name_1, D_Name_2, description = interaction
          G.add_edge(D_Name_1, D_Name_2, description=description)
 
@@ -251,7 +253,7 @@ def graph():
       # Display the figure
       pyo.plot(fig, filename='templates/drug_interaction_graph.html')
 
-      return render_template("interactionsGraphResults.html")
+      return render_template("interactionsGraphResults.html", interactions=interactions, numInteractions=numInteractions )
 
 if __name__ == '__main__':
    app.run(debug = True)

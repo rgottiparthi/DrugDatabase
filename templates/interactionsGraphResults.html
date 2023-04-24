@@ -30,10 +30,10 @@ th {
                 <th>Interaction Description:</th>
             </tr>
             <tr>
-                {% for i in range(10) %}
-                <td>{{ <!-- interactions[i][0] --> }}</td>
-                <td>{{ <!-- interactions[i][1] --> }}</td>
-                <td>{{ <!-- interactions[i][2] --> }}</td>
+                {% for i in range(numInteractions) %}
+                <td>{{ interactions[i][0] }}</td>
+                <td>{{ interactions[i][1] }}</td>
+                <td>{{ interactions[i][2] }}</td>
                 {% endfor %}
             </tr>
         </table>
