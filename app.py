@@ -4,6 +4,7 @@ import sqlite3 as sql
 import plotly.graph_objs as go
 import plotly.offline as pyo
 import networkx as nx
+import plotly.io as pio
 
 def flaskUpdate():
    s= socket(AF_INET, SOCK_STREAM)
@@ -251,7 +252,9 @@ def graph():
                         yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)))
 
       # Display the figure
-      pyo.plot(fig, filename='templates/drug_interaction_graph.html')
+      #pyo.plot(fig, filename='templates/drug_interaction_graph.html')
+
+      graph_html = pio.to_html(fig, full_html=False)
 
       return render_template("interactionsGraphResults.html", interactions=interactions, numInteractions=numInteractions )
 
