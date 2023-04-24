@@ -228,7 +228,7 @@ def graph():
 
       # Create a list of node trace objects
       node_trace = go.Scatter(x=[], y=[], text=[], mode='markers', hoverinfo='text',
-                              marker=dict(color='black', size=10, line=dict(width=2)))
+                              marker=dict(color='black', size=20, line=dict(width=2)))
 
       # Add node positions and labels to the node trace
       for node in G.nodes():
