@@ -143,24 +143,26 @@ def drugResult():
                 return "No results found for this drug name."
 
 @app.route('/product-result', methods=['POST', 'GET'])
-def productResult():
-   if request.method == 'POST':
-        productName = request.form['Product Name']
-
-        # connect to the database and acquire a "cursor"
-        with sql.connect("drugData.db") as con:
+def product():
+    if request.method == 'POST':
+      productName = request.form['Product Name']
+         # connect to the database and acquire a "cursor"
+      with sql.connect("drugData.db") as con:
             cur = con.cursor()
             cur.execute('''SELECT Products.*, Drugs.Basic_Description, Drugs.Toxicity, Drugs.Indications
                            FROM Products
-                           JOIN Drugs ON Products.D_Name = Drugs.D_Name;''', (productName,))
+                           JOIN Drugs ON Products.D_Name = Drugs.D_Name
+                           WHERE Products.P_Name = ?;''', (productName,))
             result = cur.fetchall()
 
             if result:
-
-                # fill in the values in the HTML table
-                return render_template("productResults.html")
+                  # fill in the values in the HTML table
+                  attributes = ["Product Name", "Form", "Strength", "Route", "Manufacturer", "Marketing Start",
+                              "Marketing End", "Generic", "OTC"]
+                  product_data = result[0]
+                  return render_template("productResults.html", attributes=attributes, product_data=product_data)
             else:
-                return "No results found for this drug name."
+                  return "No results found for this product name."
 
 @app.route('/delete-profile', methods=['POST', 'GET'])
 def deleteProfile():

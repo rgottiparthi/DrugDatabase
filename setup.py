@@ -88,11 +88,11 @@ import xml.etree.ElementTree as et
 import csv
 
 # Parsing the XML file
-tree = et.parse("C:\\Users\\tinatian\\Documents\\full_database.xml")
+tree = et.parse("drugData.xml")
 root = tree.getroot()
 
 # importing indications.csv file
-indications_file = open("C:\\Users\\tinatian\\Documents\\indications.csv")
+indications_file = open("indications.csv")
 contents = csv.reader(indications_file)
 cur.executemany("INSERT INTO Indications (I_Name, Description) VALUES (?, ?)", contents)
 conn.commit()

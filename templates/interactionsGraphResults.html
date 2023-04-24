@@ -3,6 +3,21 @@
 {% block title %}Create User Profile{% endblock %}
 
 {% block content %}
+<style>
+table {
+    border-collapse: collapse;
+    justify-content: center;
+    width: 75%;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: lightgray;
+}
+</style>
 
 <iframe src="drug_interaction_graph.html" width="100%" height="500"></iframe>
 
@@ -21,6 +36,7 @@
                 <td>{{ interactions[i][2] }}</td>
             </tr>
         </table>
+        <p> </p>
     </body>
 
     {% endblock %}
