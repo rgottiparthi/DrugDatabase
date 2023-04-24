@@ -251,7 +251,7 @@ def graph():
       # Display the figure
       pyo.plot(fig, filename='templates/drug_interaction_graph.html')
 
-      return render_template("drug_interaction_graph.html")
+      return render_template("interactionsGraphResults.html")
 
 if __name__ == '__main__':
    app.run(debug = True)
