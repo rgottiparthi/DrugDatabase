@@ -249,7 +249,7 @@ def graph():
                         yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)))
 
       # Display the figure
-      pyo.plot(fig, filename='drug_interaction_graph.html')
+      pyo.plot(fig, filename='templates/drug_interaction_graph.html')
 
       return render_template("drug_interaction_graph.html")
 
