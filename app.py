@@ -92,6 +92,8 @@ def update_profile():
          print(new_username)
          if new_username:
             cur.execute("UPDATE User SET UserID = ? WHERE UserID = ?", (new_username, username,))
+            cur.execute("UPDATE Has SET UserID = ? WHERE UserID = ?", (new_username, username,))
+            cur.execute("UPDATE Takes SET UserID = ? WHERE UserID = ?", (new_username, username,))
             cur.execute("SELECT UserID FROM User")
          new_age = request.form.get('age')
          if new_age:
