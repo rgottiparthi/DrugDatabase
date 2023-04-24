@@ -87,12 +87,15 @@ def update_profile():
             cur = con.cursor()
 
          username = request.form['username']
-         print(username)
+
          new_username = request.form.get('new username')
-         print(new_username)
          if new_username:
             cur.execute("UPDATE User SET UserID = ? WHERE UserID = ?", (new_username, username,))
-            cur.execute("SELECT UserID FROM User")
+            cur.execute("UPDATE Takes SET UserID = ? WHERE UserID = ?", (new_username, username,))
+            cur.execute("UPDATE Has SET UserID = ? WHERE UserID = ?", (new_username, username,))
+         else :
+            new_username = username
+         
          new_age = request.form.get('age')
          if new_age:
             new_age = int(new_age)
@@ -106,18 +109,31 @@ def update_profile():
          new_drug = request.form.get('drug name')
          new_indication = request.form.get('indication name')
 
-         # insert the form values in the database
-         new_drug = request.form.get('drug name')
          if new_drug:
-            cur.execute("SELECT D_Name FROM Drugs WHERE D_Name = ?", (new_drug,) )
+            cur.execute("SELECT D_ID FROM Drugs WHERE D_Name = ?", (new_drug,) )
             d_id = cur.fetchone()[0]
-            cur.execute("INSERT INTO Takes (UserID, D_Name) VALUES (?,?)", (username, d_id,) )
+            cur.execute("INSERT INTO Takes (UserID, D_ID) VALUES (?,?)", (new_username, d_id,) )
 
-         new_indication = request.form.get('indication name')
          if new_indication:
-            cur.execute("SELECT I_Name FROM Indications WHERE I_Name = ?", (new_indication,) )
+            cur.execute("SELECT I_ID FROM Indications WHERE I_Name = ?", (new_indication,) )
             i_id = cur.fetchone()[0]
-            cur.execute("INSERT INTO Has (UserID, I_Name) VALUES (?,?)", (username, i_id,) )
+            cur.execute("INSERT INTO Has (UserID, I_ID) VALUES (?,?)", (new_username, i_id,) )
+
+
+         remove_drug = request.form.get('remove drug name')
+         remove_indication = request.form.get('remove indication name')
+
+         # delete the form values in the database
+         if new_drug:
+            cur.execute("SELECT D_Name FROM Drugs WHERE D_Name = ?", (remove_drug,) )
+            d_id = cur.fetchone()[0]
+            cur.execute("DELETE FROM Takes (UserID, D_Name) VALUES (?,?)", (new_username, d_id,) )
+
+
+         if remove_indication:
+            cur.execute("SELECT I_Name FROM Indications WHERE I_Name = ?", (remove_indication,) )
+            i_id = cur.fetchone()[0]
+            cur.execute("DELETE FROM Has (UserID, I_Name) VALUES (?,?)", (new_username, i_id,) )
 
          con.commit()
       except:
@@ -161,7 +177,7 @@ def product():
             cur.execute('''SELECT Products.*, Drugs.Basic_Description, Drugs.Toxicity, Drugs.Indications
                            FROM Products
                            JOIN Drugs ON Products.D_Name = Drugs.D_Name
-                           WHERE Products.P_Name = ?;''', (productName,))
+                           WHERE Products.P_Name LIKE '%' || ? || '%';''', (productName,))
             result = cur.fetchall()
 
             if result:   
