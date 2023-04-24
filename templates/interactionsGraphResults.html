@@ -43,8 +43,8 @@ th {
                 <th>Drug 2 Name:</th>
                 <th>Interaction Description:</th>
             </tr>
+            {% for i in range(numInteractions) %}
             <tr>
-                {% for i in range(numInteractions) %}
                 <td>{{ interactions[i][0] }}</td>
                 <td>{{ interactions[i][1] }}</td>
                 <td>{{ interactions[i][2] }}</td>
