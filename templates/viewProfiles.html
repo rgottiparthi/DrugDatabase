@@ -3,43 +3,56 @@
 {% block title %}View User Profiles{% endblock %}
 
 {% block content %}
-<body>
-    <main>
+
+
+<main>
     <h2>View User Profiles</h2>
     <style>
-        table {
-            border-collapse: collapse;
-            justify-content: center;
-            width: 75%;
-        }
-        th, td {
+        /* Styles for user information */
+        .user-info {
             border: 1px solid black;
             padding: 8px;
-            text-align: left;
-        }
-        th {
+            margin: 10px 0;
             background-color: lightgray;
+        }
+        .user-info label {
+            font-weight: bold;
+        }
+        .user-info span {
+            margin-left: 10px;
         }
     </style>
     <p>There are currently {{ numUser }} users</p>
-    <h2>User Profile</h2>
-    <table>
-    <tr>
-        <th>Name:</th>
-        <th>Age:</th>
-        <th>Sex:</th>
-        <th>Takes:</th>
-        <th>Has:</th>
-    </tr>
     {% for i in range(numUser) %}
-    <tr>
-        <td>{{ users[i][0] }}</td>
-        <td>{{ users[i][1] }}</td>
-        <td>{{ users[i][2] }}</td>
-        <td>{{ users[i][3]|safe }}</td>
-        <td>{{ users[i][4]|safe }}</td>
-    </tr>
+        <div class="user-info">
+            <label>Name:</label>
+            <span>{{ users[i][0] }}</span>
+            <br>
+            <label>Age:</label>
+            <span>{{ users[i][1] }}</span>
+            <br>
+            <label>Sex:</label>
+            <span>{{ users[i][2] }}</span>
+            <br>
+            <label>Drugs:</label>
+            {% if users[i][3] is not none %}
+                {% for drug in users[i][3] %}
+                    <span>{{ drug }}</span>
+                {% endfor %}
+            {% else %}
+                <span>No drugs found</span>
+            {% endif %}
+            <br>
+            <label>Indications:</label>
+            {% if users[i][4] is not none %}
+                {% for indication in users[i][4] %}
+                    <span>{{ indication }}</span>
+                {% endfor %}
+            {% else %}
+                <span>No indications found</span>
+            {% endif %}
+            <br>
+        </div>
     {% endfor %}
-    </table>
-    </main>
-{% endblock %}
+</main>    
+{% endblock %} 

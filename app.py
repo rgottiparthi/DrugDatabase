@@ -28,16 +28,24 @@ def viewProfiles():
    conn = sql.connect('drugData.db')
    cur = conn.cursor()
    
-   cur.execute('''
-      SELECT u.UserID, u.Age, u.Sex, t.D_Name, h.I_Name 
-      FROM User u
-      LEFT JOIN Takes t ON u.UserID = t.UserID
-      LEFT JOIN Has h ON u.UserID = h.UserID
-   ''')
+   cur.execute('''SELECT * FROM User''')
    
    users = cur.fetchall()
    numUser = len(users)
-   
+
+   for i in range(numUser):
+      cur.execute('''SELECT D_Name
+                     From Takes
+                     WHERE UserID = ?''', (users[i][0],))
+      drugs = cur.fetchall()
+      
+      cur.execute('''SELECT I_Name
+                     From Has
+                     WHERE UserID = ?''', (users[i][0],))
+      indications = cur.fetchall()
+
+      users[i] = users[i] + (drugs,) + (indications,)
+   print (users)
    return render_template('viewProfiles.html', numUser=numUser, users=users)
 
 
