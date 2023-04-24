@@ -256,7 +256,7 @@ def graph():
 
       graph_html = pio.to_html(fig, full_html=False)
 
-      return render_template("interactionsGraphResults.html", interactions=interactions, numInteractions=numInteractions )
+      return render_template("interactionsGraphResults.html", graph_html=graph_html, interactions=interactions, numInteractions=numInteractions )
 
 if __name__ == '__main__':
    app.run(debug = True)

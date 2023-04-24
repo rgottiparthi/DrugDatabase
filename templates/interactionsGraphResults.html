@@ -26,12 +26,10 @@ th {
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <h1>My Plotly Graph</h1>
-    <div id="my-graph"></div>
+    <h1>Drug Interactions Graph Results</h1>
+    <div id="my-graph" style="width:700px;height:0px;"></div>
     <script>
         var graph_html = '{{ graph_html|safe }}';
-        var graph_div = document.getElementById('my-graph');
-        graph_div.innerHTML = graph_html;
     </script>
 </body>
 </html>
