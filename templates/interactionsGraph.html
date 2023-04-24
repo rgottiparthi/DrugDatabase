@@ -59,7 +59,7 @@
       <form action="/graph" method="post">
         {% for i in range(10) %}
         <label for="Drug {{i+1}} Name">Drug {{i+1}} Name:</label>
-        <input type="text" id="Drug {{i+1}} Name" name="Drug {{i+1}} Name" {% if i==0 or i==1 %}required{% endif %} />
+        <input type="text" id="Drug {{i+1}} Name" name="Drug {{i+1}} Name"/>
         {% endfor %}
         <input type="submit" value="Create Graph" />
         <p> </p>
